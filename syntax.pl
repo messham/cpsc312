@@ -1,4 +1,10 @@
 % true if the given string Line ends with a semicolon
+
+validate([]).
+validate([Line|T]) :-
+    semicolon_delimited(Line),
+    validate(T).
+
 semicolon_delimited(Line) :-
     string_concat(_, ";", Line).
 
