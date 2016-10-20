@@ -3,10 +3,12 @@
 (defun syntax-validator ()
   (interactive)
   ;; check that current buffer is cpp file
-
+  (setq cppbuffer (buffer-name))  
+  (if (not (string-match "\\.cpp" cppbuffer))
+      (error "SyntaxValidator requires a .cpp file!"))
+  
   ;; split screen and show eshell
   (split-window-right)
-  (setq cppbuffer (buffer-name))
   (next-multiframe-window)
   (eshell)
   (end-of-buffer)
