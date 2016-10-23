@@ -26,11 +26,3 @@ validate(Line) :-
 
 semicolon_delimited(Line) :-
     string_concat(_, ";", Line).
-
-% checks for the beginning and end of a function or block
-% TODO this is pretty naive, does not balance brackets
-% only recognizes that they are a valid alternative to semicolons
-% block_begin(Line) :-
-%     string_concat(_, "{", Line).
-% block_end(Line) :-
-%     string_concat(_, "}", Line).
