@@ -34,22 +34,34 @@ validate(Line) :-
     string_concat(_, ">", EndLine).
 
 % TODO check that brackets are balanced
-% balanced_brackets([]).
-% TODO this is broken, but pushed for code sharing
-balanced_brackets(Code, Unbalanced) :-
-    string_to_list(Code, CharList),
-    balanced(CharList, Unbalanced).
 
-% brackets balanced across multiple lines
+% Ensure that all brackets are balanced
+balanced(Code) :-
+    atom_chars(Code, CharList),
+    balanced(CharList, []).
 balanced([],[]).
-balanced([H|T], OpenBracket) :-
-    char_code('{',H),
-    balanced(T, [H|OpenBracket]).
-balanced([H|T], [_|Brackets]) :-
-    char_code('}',H),
-    balanced(T, Brackets).
-balanced([_|T], OpenBrackets) :-
-    balanced(T, OpenBrackets).
-
-% This is an example function from stack overflow
-% remove_char(S,C,X) :- atom_concat(L,R,S), atom_concat(C,W,R), atom_concat(L,W,X).
+% Round brackets
+balanced([C|S], K) :-
+    C = '(',
+    !,
+    balanced(S, [C|K]).
+balanced([C|S], [_|K]) :-
+    C = ')',
+    !,
+    balanced(S, K).
+% Curly brackets
+balanced([C|S], K) :-
+    C = '{',
+    !,
+    balanced(S, [C|K]).
+balanced([C|S], [_|K]) :-
+    C = '}',
+    !,
+    balanced(S, K).
+% This character is not a bracket
+balanced([C|S], K) :-
+    C \= '(',
+    C \= ')',
+    C \= '{',
+    C \= '}',
+    balanced(S, K).
