@@ -20,9 +20,10 @@ problems([_|T], ProblemList) :-
 
 % true if the given string Line ends with a semicolon
 validate(Line) :-
-    semicolon_delimited(Line).
-% TODO check include packages lines
-% TODO check that brackets are balanced
-
-semicolon_delimited(Line) :-
     string_concat(_, ";", Line).
+% true if this is a well-formed package include line
+% TODO this fails once lines are numbered
+validate(Line) :-
+    string_concat("#include <", EndLine, Line),
+    string_concat(_, ">", EndLine).
+% TODO check that brackets are balanced
