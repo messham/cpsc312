@@ -1,5 +1,11 @@
-check_code(Code, ProblemList) :-
-    numbered_lines(Code, 0, Numbered),
+check_code(CodeRaw, ProblemList) :-
+    % split raw code into list of lines
+    split_string(CodeRaw, "\n", "", CodeListRaw),
+    % delete white space
+    delete(CodeListRaw, "", CodeList),
+    % number lines
+    numbered_lines(CodeList, 0, Numbered),
+    % return list of problems
     problems(Numbered, ProblemList).
 
 % append numbers to the beginning of lines
