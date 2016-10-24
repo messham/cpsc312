@@ -7,3 +7,13 @@ n4v9a
 JM Messham
 p1k0b
 22307152
+
+
+**Installation**
+
+To use SyntaxValidator with emacs, save syntax-validator.el and syntax.pl in the path ~/.emacs.d/lisp/syntaxvalidator/ and add the following line to your emacs configuration:
+~~~~(add-to-list 'load-path "~/.emacs.d/lisp/syntaxvalidator/")~~~~
+
+**Use**
+
+By default SyntaxValidator will not be assigned to a keybinding and must be called using ~~~~M-x syntax-validator~~~~ while the current buffer is a .cpp file you wish to check correct syntax for. Calling this function will open up a new buffer showing the results.
