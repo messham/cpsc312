@@ -16,7 +16,7 @@ numbered_lines([H|T], Num, [LH|LT]) :-
     NPlus is Num + 1,
     numbered_lines(T, NPlus, LT).
 
-% Adds a line to the ProblemList if it is not ended by a semicolon
+% Adds a line to the ProblemList if it is not valid
 problems([],[]).
 problems([H|T], [H|ProblemList]) :-
     \+ validate(H),
@@ -24,14 +24,30 @@ problems([H|T], [H|ProblemList]) :-
 problems([_|T], ProblemList) :-
     problems(T, ProblemList).
 
+% true if this is a well-formed package include line
+validate(Line) :-
+    line_number(Line, Num),
+    string_concat(BegLine, EndLine, Line),
+    string_concat(Num, " #include <", BegLine),
+    !,
+    string_concat(_, ">", EndLine).
 % true if the given string Line ends with a semicolon
 validate(Line) :-
-    string_concat(_, ";", Line).
-% true if this is a well-formed package include line
-% TODO this fails once lines are numbered
+    string_concat(_, "{", Line).
 validate(Line) :-
-    string_concat("#include <", EndLine, Line),
-    string_concat(_, ">", EndLine).
+    string_concat(_, "}", Line).
+validate(Line) :-
+    string_concat(_, ";", Line).
+
+%
+line_number(Line, Num) :-
+    sub_atom(Line, 0, _, _, C),
+    atom_number(C, Num),
+    number(Num).
+% line_number(Line, Num) :-
+%     sub_atom(Line, 0, 1, _, C),
+%     atom_number(C, Num),
+%     number(Num).
 
 % TODO check that brackets are balanced
 
