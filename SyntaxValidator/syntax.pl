@@ -44,12 +44,6 @@ line_number(Line, Num) :-
     sub_atom(Line, 0, _, _, C),
     atom_number(C, Num),
     number(Num).
-% line_number(Line, Num) :-
-%     sub_atom(Line, 0, 1, _, C),
-%     atom_number(C, Num),
-%     number(Num).
-
-% TODO check that brackets are balanced
 
 % Ensure that all brackets are balanced
 balanced(Code) :-
