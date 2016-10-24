@@ -3,7 +3,8 @@
 (defun syntax-validator ()
   (interactive)
   ;; check that current buffer is cpp file
-  (setq cppbuffer (buffer-name))  
+  (setq cppbuffer (buffer-name))
+  (setq code (buffer-string))
   (if (not (string-match "\\.cpp" cppbuffer))
       (error "SyntaxValidator requires a .cpp file!"))
   
@@ -23,9 +24,13 @@
   (eshell-send-input)
   (insert "[syntax].")
   (eshell-send-input)
-  (insert-buffer cppbuffer)
+  (insert "check_code(\"")
+  (insert code)
+  (insert "\", Errors).")
+  (eshell-send-input)
   (end-of-buffer)
   )
+
 
 (provide 'syntax-validator)
 
