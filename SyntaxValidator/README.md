@@ -11,7 +11,8 @@ p1k0b
 
 **Installation**
 
-To use SyntaxValidator with emacs, save syntax-validator.el and syntax.pl in the path ~/.emacs.d/lisp/syntaxvalidator/ and add the following lines to your emacs configuration ```(add-to-list 'load-path "~/.emacs.d/lisp/syntaxvalidator/")
+To use SyntaxValidator with emacs, save syntax-validator.el and syntax.pl in the path ~/.emacs.d/lisp/syntaxvalidator/ and add the following lines to your emacs configuration:
+```(add-to-list 'load-path "~/.emacs.d/lisp/syntaxvalidator/")
 (require 'syntax-validator)```
 
 **Use**
